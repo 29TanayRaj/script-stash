@@ -5,7 +5,7 @@ Create a chatbot that can answer questions based on the content of a provided PD
 *“Sorry, I didn’t understand your question. Do you want to connect with a live agent?”*
 
 ## Solution Proposed
-Creating a Rag+LLM based chatbot that combines **Retrieval-Augmented Generation (RAG)** with Large Language Models (LLMs) to provide a context-aware conversational interface. The system enables users to interact with the chatbot and leverage contextual information from uploaded documents for accurate and dynamic responses.
+A Rag+LLM based chatbot that combines **Retrieval-Augmented Generation (RAG)** with Large Language Models (LLMs) to provide a context-aware conversational interface. The system enables users to interact with the chatbot and leverage contextual information from uploaded documents for accurate and dynamic responses.
 
 ### Key Features
 1. **Document Upload and Processing**: Accepts PDFs to create a searchable database of chunks for retrieval-based question answering.
