@@ -1,11 +1,11 @@
-# Documentation for RAG + LLM Powered Chatbot
+# Documentation for AI Chatbot
 
 **Objective**:
 Create a chatbot that can answer questions based on the content of a provided PDF document. If the chatbot cannot find the answer in the PDF, it should respond:
 *“Sorry, I didn’t understand your question. Do you want to connect with a live agent?”*
 
 ## Solution Proposed
-A Rag+LLM based chatbot that combines **Retrieval-Augmented Generation (RAG)** with Large Language Models (LLMs) to provide a context-aware conversational interface. The system enables users to interact with the chatbot and leverage contextual information from uploaded documents for accurate and dynamic responses.
+A AI chatbot that combines **Retrieval-Augmented Generation (RAG)** with Large Language Models (LLMs) to provide a context-aware conversational interface. The system enables users to interact with the chatbot and leverage contextual information from uploaded documents for accurate and dynamic responses.
 
 ### Key Features
 1. **Document Upload and Processing**: Accepts PDFs to create a searchable database of chunks for retrieval-based question answering.
@@ -18,14 +18,15 @@ A Rag+LLM based chatbot that combines **Retrieval-Augmented Generation (RAG)** w
 
 ### Tech Stack Used
 1. **Ollama** - For running local large language models.
-2. **Langchain** - For managing the entier workflow of the system.
-3. **Fiass** - For storing the vector embeddings of the document (chunks).
-4. **OllamaEmbeddings** - For generating embeddings for the vector Database.
-5. **normic-embeded-text** - LLM used for generating vector embeddings from document (chunks).
-6. **PyPDFLoader** - For loading the PDF file.
-7. **Pickle Library**- For saving the Fiass Database, so that it can be reused.
-8. **Streamlit** - For front end of the system.
-9. **Programming language** - Python
+2. **Groq** - For running 'llama3-70b-8192' lannguage Model
+3. **Langchain** - For managing the entier workflow of the system.
+4. **Fiass** - For storing the vector embeddings of the document (chunks).
+5. **OllamaEmbeddings** - For generating embeddings for the vector Database.
+6. **normic-embeded-text** - LLM used for generating vector embeddings from document (chunks).
+7. **PyPDFLoader** - For loading the PDF file.
+8. **Pickle Library**- For saving the Fiass Database, so that it can be reused.
+9. **Streamlit** - For front end of the system.
+10. **Programming language** - Python
 
 Note: For most of the tech stack wrappers from the langchain_community was used (can be observed in the required libraries section)
 
@@ -35,14 +36,19 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_community.llms.ollama import Ollama
+import streamlit as st
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.vectorstores import FAISS
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_groq import ChatGroq
 import numpy as np
 import pickle
-import streamlit as st
+import os
+from dotenv import load_dotenv
+
 ```
 
 ### Custom Class
@@ -103,7 +109,7 @@ class OllamaEmbeddingsNormalized(OllamaEmbeddings):
 #### Query Execution
 1. **Database-Enhanced Responses**:
    - Retrieves relevant chunks using FAISS's `similarity_search_with_relevance_scores`.
-   - Filters results with a relevance score > 0.2. (The threshold is decided heuristically, futher study is need to select a appropriate threshold).
+   - Filters results with a relevance score > 0.25. (The threshold is decided heuristically, futher study is need to select a appropriate threshold).
    - This allows us to introduce the fallback in the system.
 2. **Prompt Preparation**:
    - Constructs a dynamic template incorporating chat history and context for optimal responses.
@@ -166,7 +172,7 @@ Loops through `st.session_state.chat_history` to render chat messages in the UI.
 ## Usage Instructions
 1. Launch the application:
    ```bash
-   streamlit run app.py
+   streamlit run ai_chatbot.py
    ```
 2. Configure model and upload database or PDF via the sidebar.
 3. Interact with the chatbot by entering questions in the chat input.
