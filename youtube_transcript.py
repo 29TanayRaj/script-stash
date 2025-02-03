@@ -14,7 +14,7 @@ def get_transcript(vid_code):
     """
 
     # Getting the subtitles from the video
-    vid_sub = YouTubeTranscriptApi.get_transcript('nNK4xKkAapM')
+    vid_sub = YouTubeTranscriptApi.get_transcript(vid_code)
 
     # Vid_sub is a list of dicts, we only need text from each dict
 
