@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+
+# Pytest
+.pytest_cache/
+.pytest_tmp/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Databases (in case of switching to file-based)
+*.sqlite3
+*.db
+
+# Environment variables
+.env
+
+# IDEs
+.vscode/
+.idea/
